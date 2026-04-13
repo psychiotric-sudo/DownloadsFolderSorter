@@ -1,47 +1,116 @@
-# 📂 Downloads Folder Sorter (Autonomous Edition)
+# Downloads Folder Sorter -- Autonomous Edition
 
-A high-efficiency, low-power background service that keeps your Downloads folder organized 24/7. It utilizes exhaustive file-type mapping and content-based duplicate detection to manage your digital workspace silently.
+A silent, zero-config background service that keeps your `Downloads` folder
+organized 24/7. It runs at idle CPU priority, sorts 500+ file types, deduplicates
+by content hash, and starts automatically on login.
 
-## 🛠️ What Does This Script Do?
+---
 
-This system operates as a "set-and-forget" Windows service with the following logic:
+## One-Liner Install
 
-- [cite_start]**Autonomous Sorting**: Monitors your `Downloads` folder every 5 minutes and moves files to dedicated subdirectories in `Documents`, `Pictures`, `Music`, and `Videos`[cite: 4].
-- [cite_start]**Deep File Mapping**: Includes custom paths for over 100+ extensions, including specialized folders for **Autodesk AutoCAD/3ds Max**, **Adobe Creative Cloud** (Photoshop, Illustrator, Premiere, etc.), and **Microsoft Office**[cite: 4].
-- [cite_start]**Media Date-Sorting**: Automatically groups Photos, Music, and Videos into folders formatted as `[InvertedYear] MMM-DD-YY` (e.g., `[7974] Apr-11-26`) so the newest downloads always appear at the top[cite: 4].
-- [cite_start]**Intelligent Duplicate Removal**: Uses SHA256 hashing to identify and delete exact bit-for-bit duplicate files before they are moved, saving disk space[cite: 4].
-- [cite_start]**In-Progress Protection**: Smart-filters out temporary browser files (`.crdownload`, `.tmp`, `.part`) to ensure files are only moved once the download is 100% complete[cite: 4].
-- **System Efficiency**: Runs at `Idle` CPU priority. [cite_start]It waits for the processor to be "bored" before performing tasks, ensuring zero lag in your Engineering apps or games[cite: 4].
-- [cite_start]**Recursive Cleanup**: Performs a 5-pass deep-scan to delete empty nested folders left behind after sorting[cite: 4].
-
-## 🚀 One-Liner Installation
-
-Install and hide the service instantly. Press **Win + R**, paste the following, and hit **Enter**:
+Open **PowerShell** (Win + R -> type `powershell` -> Enter) and paste:
 
 ```powershell
-powershell -ep bypass -w hidden -c "iwr '[https://gist.githubusercontent.com/psychiotric-sudo/1534904084065cf659117ab4fb56c12f/raw/5464f7d23460de78f1de9a9784a3785f3123576e/Initialize-DownloadsSorter.ps1](https://gist.githubusercontent.com/psychiotric-sudo/1534904084065cf659117ab4fb56c12f/raw/5464f7d23460de78f1de9a9784a3785f3123576e/Initialize-DownloadsSorter.ps1)' | iex"
+powershell -ep bypass -w hidden -c "iwr 'https://gist.githubusercontent.com/psychiotric-sudo/1534904084065cf659117ab4fb56c12f/raw/Initialize-DownloadsSorter.ps1' | iex"
 ```
 
-## 📂 File Structure
+That is all. The script handles everything:
 
-[cite_start]The installation creates a hidden folder in your Documents to keep the "engine" out of sight[cite: 6]:
+1. Creates a hidden folder at `Documents\DownloadsFolderSorter\`
+2. Downloads the engine files into it
+3. Hides the folder from Explorer (`attrib +h +s`)
+4. Registers a startup shortcut so the sorter survives reboots
+5. Launches the sorter immediately -- no restart needed
 
-- [cite_start]`Documents\DownloadsFolderSorter\` (Hidden) [cite: 6]
-  - `bin\Sort-DownloadsFolder.ps1`: The core PowerShell engine.
-  - [cite_start]`bin\Run-SortDownloadsHidden.vbs`: The silent invoker that hides the terminal window[cite: 4].
+---
 
-## 📝 Manual Setup
+## What It Does
 
-1.  Place **`Sort-DownloadsFolder.ps1`** and **`Run-SortDownloadsHidden.vbs`** in a folder.
-2.  [cite_start](Optional) Run `attrib +h "YourFolderName"` to hide it[cite: 6].
-3.  Create a shortcut of **`Run-SortDownloadsHidden.vbs`**.
-4.  Move that shortcut to your Windows Startup folder: `shell:startup`.
+| Feature                         | Detail                                                                                               |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Autonomous sorting**          | Scans `Downloads` every 5 minutes and moves files to `Documents`, `Pictures`, `Music`, `Videos`      |
+| **500+ extension map**          | Dedicated subfolders for Office, Adobe CC, Autodesk, 3D/CAD, Game Dev, ML models, Firmware, and more |
+| **Media date-sorting**          | Photos/videos/audio land in `[InvertedYear] MMM-DD-YY` subfolders so newest always sorts to top      |
+| **SHA-256 deduplication**       | Bit-for-bit identical files are deleted before moving -- no duplicate buildup                        |
+| **In-progress protection**      | Skips `.crdownload`, `.part`, `.tmp`, and 15+ other incomplete-download extensions                   |
+| **Idle CPU priority**           | Process priority set to `Idle` -- zero impact on games or apps                                       |
+| **5-pass empty-folder cleanup** | Recursively removes leftover empty directories after each sort cycle                                 |
 
-## ⚙️ Requirements
+---
 
-- **OS**: Windows 10/11
-- **PowerShell**: 5.1 or higher (standard on Windows)
+## File Structure
 
-## ⚖️ License
+After install, the hidden engine folder looks like this:
+
+```
+Documents\
+  DownloadsFolderSorter\     <-- hidden (+h +s)
+    bin\
+      Sort-DownloadsFolder.ps1      core sorting engine
+      Run-SortDownloadsHidden.vbs   silent launcher (no terminal window)
+
+AppData\...\Startup\
+  RunDownloadsSorter.lnk            auto-start shortcut
+```
+
+Nothing is visible in Explorer unless you enable "Show hidden items."
+
+---
+
+## How the Sorter Organizes Files
+
+**Documents** (by app):
+`Microsoft Word / Excel / PowerPoint / Access / Visio / Project / Outlook`
+`Adobe Photoshop / Illustrator / InDesign / Premiere / After Effects / Lightroom`
+`Autodesk AutoCAD / 3ds Max / Maya / Inventor / Revit / Navisworks`
+`Blender / Cinema 4D / SolidWorks / SketchUp / CATIA`
+`PDFs / Archives / Executables / Fonts / eBooks / Database / Code / ...`
+
+**Pictures**: sorted by camera type (RAW, JPEG, HEIC, etc.) then date-bucketed
+
+**Music**: sorted by format, with subfolders for DAW projects (Ableton, FL Studio, Logic, Pro Tools)
+
+**Videos**: sorted by format, with subfolders for NLE projects (Premiere, DaVinci, Vegas, FCPX)
+
+Unknown extensions land in `Documents\Other Files\Uncategorized\<EXT>` instead of being ignored.
+
+---
+
+## Manual Install (no one-liner)
+
+1. Download `Sort-DownloadsFolder.ps1` and `Run-SortDownloadsHidden.vbs`
+2. Place both in a folder (e.g. `C:\Tools\DownloadsSorter\`)
+3. Optionally run `attrib +h "C:\Tools\DownloadsSorter"` to hide it
+4. Right-click `Run-SortDownloadsHidden.vbs` -> Create shortcut
+5. Move the shortcut to `shell:startup`
+6. Double-click the VBS to start immediately (or reboot)
+
+---
+
+## Uninstall
+
+```powershell
+# Remove startup shortcut
+Remove-Item "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\RunDownloadsSorter.lnk" -Force
+
+# Remove engine folder (unhide first)
+attrib -h -s "$env:USERPROFILE\Documents\DownloadsFolderSorter"
+Remove-Item "$env:USERPROFILE\Documents\DownloadsFolderSorter" -Recurse -Force
+
+# Kill any running instance
+Get-Process wscript -ErrorAction SilentlyContinue | Stop-Process -Force
+```
+
+---
+
+## Requirements
+
+- Windows 10 or 11
+- PowerShell 5.1+ (built into Windows, no install needed)
+- Internet connection (for the one-liner only)
+
+---
+
+## License
 
 MIT
