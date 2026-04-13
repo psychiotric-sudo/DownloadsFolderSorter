@@ -1,3 +1,4 @@
+Set-Location $PSScriptRoot
 # ===================================================================
 # Downloads Folder Organizer - ULTRA EDITION v2
 # Features: Idle Priority, Loop-Ready, 5-Pass Cleanup,
@@ -12,7 +13,7 @@
 # ===================================================================
 
 # ---------------------------------------------------------------
-# VERBOSE LOGGING — Set to $true during development/testing,
+# VERBOSE LOGGING -- Set to $true during development/testing,
 #                   Set to $false for silent background operation
 # ---------------------------------------------------------------
 $VerboseLogging = $false
@@ -220,11 +221,11 @@ while ($true) {
             ".rwl"             = $pictures
             ".dng"             = $pictures
             ".pef"             = $pictures
-            ".ptx"             = $pictures          # Pentax RAW — priority over Pro Tools .ptx
+            ".ptx"             = $pictures
             ".srw"             = $pictures
             ".x3f"             = $pictures
             ".bay"             = $pictures
-            ".cap"             = $pictures          # Phase One RAW — priority over Security/Firmware
+            ".cap"             = $pictures
             ".iiq"             = $pictures
             ".eip"             = $pictures
             ".fff"             = $pictures
@@ -257,7 +258,7 @@ while ($true) {
             ".ape"             = $music
             ".au"              = $music
             ".ra"              = $music
-            ".rm"              = $music             # RealAudio — priority over Video .rm
+            ".rm"              = $music
             ".mka"             = $music
             ".wv"              = $music
             ".tta"             = $music
@@ -282,13 +283,13 @@ while ($true) {
             ".stm"             = $music
             ".far"             = $music
             ".amf"             = $music
-            ".psf"             = $music             # PSF chiptune — priority over Fonts .psf
+            ".psf"             = $music
             ".psf2"            = $music
             ".minipsf"         = $music
             ".gsf"             = $music
             ".minigsf"         = $music
             ".spc"             = $music
-            ".nsf"             = $music             # NES Sound Format — priority over Lotus Notes .nsf
+            ".nsf"             = $music
             ".vgm"             = $music
             ".vgz"             = $music
             ".sid"             = $music
@@ -306,7 +307,7 @@ while ($true) {
             ".fst"             = "$music\FL Studio"
             ".logic"           = "$music\Logic Pro"
             ".logicx"          = "$music\Logic Pro"
-            ".ptf"             = "$music\Pro Tools"       # .ptx is RAW Camera above
+            ".ptf"             = "$music\Pro Tools"
             ".ptxt"            = "$music\Pro Tools"
             ".bwf"             = "$music\Broadcast WAV"
             ".rx2"             = "$music\REX Files"
@@ -339,7 +340,7 @@ while ($true) {
             ".3g2"             = $videos
             ".vob"             = $videos
             ".ogv"             = $videos
-            ".ts"              = $videos            # Transport Stream — priority over TypeScript .ts
+            ".ts"              = $videos
             ".mts"             = $videos
             ".m2ts"            = $videos
             ".m2t"             = $videos
@@ -386,7 +387,7 @@ while ($true) {
             # --- SUBTITLES & CAPTIONS ---
             ".srt"             = "$videos\Subtitles"
             ".sub"             = "$videos\Subtitles"
-            ".ass"             = "$videos\Subtitles"    # SubStation Alpha — priority over Arnold .ass
+            ".ass"             = "$videos\Subtitles"
             ".ssa"             = "$videos\Subtitles"
             ".vtt"             = "$videos\Subtitles"
             ".lrc"             = "$videos\Subtitles"
@@ -443,14 +444,14 @@ while ($true) {
             ".odp"             = "$documents\Microsoft PowerPoint"
             ".fodp"            = "$documents\Microsoft PowerPoint"
             ".otp"             = "$documents\Microsoft PowerPoint"
-            ".key"             = "$documents\Security\Private Keys"   # Security over Apple Keynote
+            ".key"             = "$documents\Security\Private Keys"
 
             # --- MS OFFICE / OTHERS ---
             ".mdb"             = "$documents\Microsoft Access"
             ".accdb"           = "$documents\Microsoft Access"
             ".accde"           = "$documents\Microsoft Access"
             ".accdt"           = "$documents\Microsoft Access"
-            ".pub"             = "$documents\Security\Public Keys"    # Security over MS Publisher
+            ".pub"             = "$documents\Security\Public Keys"
             ".one"             = "$documents\Microsoft OneNote"
             ".onetoc2"         = "$documents\Microsoft OneNote"
             ".vsdx"            = "$documents\Microsoft Visio"
@@ -522,9 +523,9 @@ while ($true) {
             ".igs"             = "$documents\CAD\IGES"
             ".step"            = "$documents\CAD\STEP"
             ".stp"             = "$documents\CAD\STEP"
-            ".stl"             = "$documents\CAD\STL 3D Print"        # 3D Print — priority over Subtitle .stl
+            ".stl"             = "$documents\CAD\STL 3D Print"
             ".obj"             = "$documents\CAD\OBJ 3D"
-            ".3ds"             = "$documents\CAD\3DS 3D"              # 3DS 3D — priority over Emulation ROM
+            ".3ds"             = "$documents\CAD\3DS 3D"
             ".dae"             = "$documents\CAD\Collada"
             ".ifc"             = "$documents\CAD\IFC BIM"
             ".ifcxml"          = "$documents\CAD\IFC BIM"
@@ -565,9 +566,6 @@ while ($true) {
             ".vrmesh"          = "$documents\3D\V-Ray"
             ".vrscene"         = "$documents\3D\V-Ray"
             ".rib"             = "$documents\3D\RenderMan"
-            # .rs -> Code/Rust (defined below)
-            # .mat -> Science/MATLAB (defined below)
-            # .ass -> Subtitles (defined above)
 
             # --- GIS / GEOSPATIAL ---
             ".shp"             = "$documents\GIS\Shapefiles"
@@ -600,8 +598,6 @@ while ($true) {
             ".dt0"             = "$documents\GIS\DTED"
             ".dt1"             = "$documents\GIS\DTED"
             ".dt2"             = "$documents\GIS\DTED"
-            # .dbf -> Database/dBASE (defined below)
-            # .fit -> Science/Astronomy (defined below)
 
             # --- MEDICAL / SCIENTIFIC IMAGING ---
             ".dcm"             = "$documents\Medical\DICOM"
@@ -615,11 +611,9 @@ while ($true) {
             ".hl7"             = "$documents\Medical\HL7"
             ".cda"             = "$documents\Medical\CDA"
             ".fcs"             = "$documents\Medical\Flow Cytometry"
-            # .bdf -> Fonts (defined below)
-            # .hdr -> Pictures (defined above)
 
             # --- SCIENCE / DATA / RESEARCH ---
-            ".mat"             = "$documents\Science\MATLAB"          # MATLAB — priority over 3D Materials
+            ".mat"             = "$documents\Science\MATLAB"
             ".fig"             = "$documents\Science\MATLAB"
             ".nb"              = "$documents\Science\Mathematica"
             ".cdf"             = "$documents\Science\CDF"
@@ -628,7 +622,7 @@ while ($true) {
             ".hdf5"            = "$documents\Science\HDF5"
             ".he5"             = "$documents\Science\HDF5"
             ".fits"            = "$documents\Science\Astronomy FITS"
-            ".fit"             = "$documents\Science\Astronomy FITS"  # Astronomy — priority over GPS .fit
+            ".fit"             = "$documents\Science\Astronomy FITS"
             ".fts"             = "$documents\Science\Astronomy FITS"
             ".sav"             = "$documents\Science\IDL-SPSS"
             ".spss"            = "$documents\Science\SPSS"
@@ -652,7 +646,7 @@ while ($true) {
             ".onnx"            = "$documents\Machine Learning\ONNX"
             ".tflite"          = "$documents\Machine Learning\TensorFlow Lite"
             ".pb"              = "$documents\Machine Learning\TensorFlow"
-            ".h5"              = "$documents\Machine Learning\Keras"  # Keras — priority over HDF5
+            ".h5"              = "$documents\Machine Learning\Keras"
             ".pkl"             = "$documents\Machine Learning\Pickled Models"
             ".pickle"          = "$documents\Machine Learning\Pickled Models"
             ".joblib"          = "$documents\Machine Learning\Joblib Models"
@@ -717,10 +711,6 @@ while ($true) {
             ".chd"             = "$documents\Emulation\CHD Disc Images"
             ".pbp"             = "$documents\Emulation\PSP"
             ".cso"             = "$documents\Emulation\PSP"
-            # .md  -> Text/Markdown (defined below)
-            # .img -> Virtual Machines (defined below)
-            # .mdf -> Database/SQL Server (defined below)
-            # .3ds -> CAD/3DS (defined above)
 
             # --- SECURITY / CERTIFICATES / KEYS ---
             ".pem"             = "$documents\Security\Certificates"
@@ -735,7 +725,7 @@ while ($true) {
             ".csr"             = "$documents\Security\CSR"
             ".ppk"             = "$documents\Security\PuTTY Keys"
             ".jks"             = "$documents\Security\Java Keystores"
-            ".keystore"        = "$documents\Security\Java Keystores"   # single entry — priority over Mobile
+            ".keystore"        = "$documents\Security\Java Keystores"
             ".asc"             = "$documents\Security\PGP"
             ".gpg"             = "$documents\Security\PGP"
             ".sig"             = "$documents\Security\Signatures"
@@ -743,9 +733,6 @@ while ($true) {
             ".pcap"            = "$documents\Security\Network Captures"
             ".pcapng"          = "$documents\Security\Network Captures"
             ".etl"             = "$documents\Security\Event Traces"
-            # .key -> already defined above (MS Office section, Security priority)
-            # .pub -> already defined above (MS Office section, Security priority)
-            # .cap -> already defined above (RAW Camera)
 
             # --- CRYPTO / BLOCKCHAIN ---
             ".wallet"          = "$documents\Crypto\Wallets"
@@ -755,7 +742,7 @@ while ($true) {
 
             # --- FIRMWARE / EMBEDDED ---
             ".hex"             = "$documents\Firmware\Intel HEX"
-            ".bin"             = "$documents\Firmware\Binary"           # Firmware — priority over ML/Exec
+            ".bin"             = "$documents\Firmware\Binary"
             ".elf"             = "$documents\Firmware\ELF"
             ".axf"             = "$documents\Firmware\ARM"
             ".srec"            = "$documents\Firmware\Motorola SREC"
@@ -768,7 +755,6 @@ while ($true) {
             ".bios"            = "$documents\Firmware\BIOS"
             ".efi"             = "$documents\Firmware\UEFI"
             ".fud"             = "$documents\Firmware\Updates"
-            # .out -> System/Logs (defined below)
 
             # --- DATABASE ---
             ".db"              = "$documents\Database"
@@ -777,7 +763,7 @@ while ($true) {
             ".db3"             = "$documents\Database\SQLite"
             ".s3db"            = "$documents\Database\SQLite"
             ".sl3"             = "$documents\Database\SQLite"
-            ".mdf"             = "$documents\Database\SQL Server"       # SQL Server — priority over Disc Image
+            ".mdf"             = "$documents\Database\SQL Server"
             ".ldf"             = "$documents\Database\SQL Server"
             ".ndf"             = "$documents\Database\SQL Server"
             ".dump"            = "$documents\Database\Dumps"
@@ -785,16 +771,14 @@ while ($true) {
             ".dmp"             = "$documents\Database\Oracle Dumps"
             ".frm"             = "$documents\Database\MySQL"
             ".ibd"             = "$documents\Database\MySQL"
-            ".dbf"             = "$documents\Database\dBASE"            # dBASE — priority over GIS sidecar
-            ".pdb"             = "$documents\Database\PDB"              # PDB — priority over eBooks PDB
+            ".dbf"             = "$documents\Database\dBASE"
+            ".pdb"             = "$documents\Database\PDB"
             ".ntf"             = "$documents\Database\Lotus Notes"
             ".fp7"             = "$documents\Database\FileMaker"
             ".fmp12"           = "$documents\Database\FileMaker"
-            # .nsf -> Music (NES Sound Format, defined above)
-            # .bak -> System/Backups (defined below)
 
             # --- VIRTUAL MACHINE / DISK IMAGES ---
-            ".vhd"             = "$documents\Virtual Machines\Hyper-V"  # Hyper-V — priority over VHDL code
+            ".vhd"             = "$documents\Virtual Machines\Hyper-V"
             ".vhdx"            = "$documents\Virtual Machines\Hyper-V"
             ".vmdk"            = "$documents\Virtual Machines\VMware"
             ".vmx"             = "$documents\Virtual Machines\VMware"
@@ -806,7 +790,7 @@ while ($true) {
             ".vbox"            = "$documents\Virtual Machines\VirtualBox"
             ".qcow"            = "$documents\Virtual Machines\QEMU"
             ".qcow2"           = "$documents\Virtual Machines\QEMU"
-            ".img"             = "$documents\Virtual Machines\Raw Disk Images"   # single entry
+            ".img"             = "$documents\Virtual Machines\Raw Disk Images"
             ".hdd"             = "$documents\Virtual Machines\Parallels"
             ".pvs"             = "$documents\Virtual Machines\Parallels"
             ".pvm"             = "$documents\Virtual Machines\Parallels"
@@ -821,7 +805,7 @@ while ($true) {
             ".snap"            = "$documents\Packages\Snap"
             ".appimage"        = "$documents\Packages\AppImage"
             ".nupkg"           = "$documents\Packages\NuGet"
-            ".jar"             = "$documents\Packages\Java JAR"          # JAR — priority over Archives
+            ".jar"             = "$documents\Packages\Java JAR"
             ".war"             = "$documents\Packages\Java WAR"
             ".ear"             = "$documents\Packages\Java EAR"
             ".whl"             = "$documents\Packages\Python Wheel"
@@ -832,7 +816,7 @@ while ($true) {
             ".vsix"            = "$documents\Packages\VS Code Extensions"
             ".ipa"             = "$documents\Packages\iOS Apps"
             ".apk"             = "$documents\Packages\Android Apps"
-            ".aab"             = "$documents\Packages\Android Bundles"   # single entry — priority over Mobile
+            ".aab"             = "$documents\Packages\Android Bundles"
 
             # --- MOBILE ---
             ".mobileprovision" = "$documents\Mobile\iOS Provisioning"
@@ -885,7 +869,7 @@ while ($true) {
             ".pfm"             = "$documents\Fonts"
             ".pfb"             = "$documents\Fonts"
             ".afm"             = "$documents\Fonts"
-            ".bdf"             = "$documents\Fonts"              # Bitmap font — priority over Medical BDF
+            ".bdf"             = "$documents\Fonts"
             ".pcf"             = "$documents\Fonts"
             ".snf"             = "$documents\Fonts"
             ".suit"            = "$documents\Fonts"
@@ -937,7 +921,7 @@ while ($true) {
             ".js"              = "$documents\Code\JavaScript"
             ".mjs"             = "$documents\Code\JavaScript"
             ".cjs"             = "$documents\Code\JavaScript"
-            ".tsx"             = "$documents\Code\TypeScript"           # .ts -> Video above
+            ".tsx"             = "$documents\Code\TypeScript"
             ".jsx"             = "$documents\Code\JavaScript React"
             ".vue"             = "$documents\Code\Vue"
             ".svelte"          = "$documents\Code\Svelte"
@@ -964,10 +948,10 @@ while ($true) {
             ".clj"             = "$documents\Code\Clojure"
             ".cljs"            = "$documents\Code\ClojureScript"
             ".go"              = "$documents\Code\Go"
-            ".rs"              = "$documents\Code\Rust"                # Rust — priority over 3D Redshift .rs
+            ".rs"              = "$documents\Code\Rust"
             ".rlib"            = "$documents\Code\Rust"
             ".swift"           = "$documents\Code\Swift"
-            ".m"               = "$documents\Code\Objective-C"         # ObjC — priority over MATLAB .m
+            ".m"               = "$documents\Code\Objective-C"
             ".mm"              = "$documents\Code\Objective-C"
             ".rb"              = "$documents\Code\Ruby"
             ".erb"             = "$documents\Code\Ruby"
@@ -1005,17 +989,17 @@ while ($true) {
             ".zig"             = "$documents\Code\Zig"
             ".v"               = "$documents\Code\Verilog"
             ".sv"              = "$documents\Code\SystemVerilog"
-            ".vhdl"            = "$documents\Code\VHDL"                # .vhd -> Virtual Machines above
+            ".vhdl"            = "$documents\Code\VHDL"
             ".asm"             = "$documents\Code\Assembly"
             ".s"               = "$documents\Code\Assembly"
             ".nasm"            = "$documents\Code\Assembly"
             ".a51"             = "$documents\Code\Assembly"
-            ".ps1"             = "$documents\Code\PowerShell"           # PowerShell — priority over PS1 Emu
+            ".ps1"             = "$documents\Code\PowerShell"
             ".psm1"            = "$documents\Code\PowerShell"
             ".psd1"            = "$documents\Code\PowerShell"
             ".ps1xml"          = "$documents\Code\PowerShell"
             ".bat"             = "$documents\Code\Batch"
-            ".cmd"             = "$documents\Code\Batch"                # single entry
+            ".cmd"             = "$documents\Code\Batch"
             ".bash"            = "$documents\Code\Bash"
             ".sh"              = "$documents\Code\Shell"
             ".zsh"             = "$documents\Code\Shell"
@@ -1042,7 +1026,7 @@ while ($true) {
             ".aleo"            = "$documents\Code\Aleo"
 
             # --- WEB / API / DATA ---
-            ".json"            = "$documents\Data\JSON"                 # single entry
+            ".json"            = "$documents\Data\JSON"
             ".jsonld"          = "$documents\Data\JSON-LD"
             ".xml"             = "$documents\Data\XML"
             ".xsd"             = "$documents\Data\XML Schema"
@@ -1072,7 +1056,7 @@ while ($true) {
             ".text"            = "$documents\Text"
             ".nfo"             = "$documents\Text\NFO Info"
             ".diz"             = "$documents\Text\DIZ"
-            ".md"              = "$documents\Text\Markdown"             # Markdown — priority over Sega .md
+            ".md"              = "$documents\Text\Markdown"
             ".markdown"        = "$documents\Text\Markdown"
             ".mdown"           = "$documents\Text\Markdown"
             ".mkdn"            = "$documents\Text\Markdown"
@@ -1091,18 +1075,18 @@ while ($true) {
             # --- SYSTEM / CONFIG / LOGS ---
             ".ini"             = "$documents\System\Config"
             ".cfg"             = "$documents\System\Config"
-            ".conf"            = "$documents\System\Config"             # single entry
-            ".inf"             = "$documents\System\INF"                # INF — priority over Executables
-            ".reg"             = "$documents\System\Registry"           # single entry
+            ".conf"            = "$documents\System\Config"
+            ".inf"             = "$documents\System\INF"
+            ".reg"             = "$documents\System\Registry"
             ".log"             = "$documents\System\Logs"
             ".log1"            = "$documents\System\Logs"
             ".log2"            = "$documents\System\Logs"
             ".err"             = "$documents\System\Logs"
-            ".out"             = "$documents\System\Logs"               # Logs — priority over Firmware .out
+            ".out"             = "$documents\System\Logs"
             ".trace"           = "$documents\System\Logs"
             ".tmp"             = "$documents\System\Temp"
             ".temp"            = "$documents\System\Temp"
-            ".bak"             = "$documents\System\Backups"            # single entry — priority over DB
+            ".bak"             = "$documents\System\Backups"
             ".backup"          = "$documents\System\Backups"
             ".old"             = "$documents\System\Backups"
             ".orig"            = "$documents\System\Backups"
@@ -1205,7 +1189,7 @@ while ($true) {
                     $existingHash = Get-FileHash-Custom $destPath
                     $incomingHash = Get-FileHash-Custom $_.FullName
                     if ($existingHash -and $incomingHash -and ($existingHash -eq $incomingHash)) {
-                        Write-Log "DEDUP — deleted duplicate: $($_.Name)" "DEDUP"
+                        Write-Log "DEDUP -- deleted duplicate: $($_.Name)" "DEDUP"
                         Remove-Item -LiteralPath $_.FullName -Force -ErrorAction SilentlyContinue
                         $dedupCount++
                         return
@@ -1265,7 +1249,7 @@ while ($true) {
         }
 
         # ===============================================================
-        # CLEANUP — 5-PASS EMPTY FOLDER REMOVAL
+        # CLEANUP -- 5-PASS EMPTY FOLDER REMOVAL
         # ===============================================================
         Write-Log "Running empty-folder cleanup (5 passes)..." "CLEAN"
         for ($i = 0; $i -lt 5; $i++) {
